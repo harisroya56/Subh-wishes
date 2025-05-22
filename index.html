@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aapke Liye Ek Sandesh</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fde0ef; /* Light pink background */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll on body */
+        }
+
+        .page {
+            padding: 15px; /* Reduced padding slightly for more content */
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 95%;
+            width: 500px;
+            box-sizing: border-box;
+            transition: opacity 0.5s ease-in-out;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Page 1 Styles */
+        #page1 {
+            background-color: #fff0f5;
+            border: 4px solid #ff69b4;
+        }
+        #page1 h2 { color: #d81b60; margin-top: 0; font-size: 1.8em; }
+        #page1 p { font-size: 1.1em; margin-bottom: 20px; }
+        #userName {
+            padding: 10px 15px; border-radius: 8px; border: 2px solid #ff85a2;
+            font-size: 1em; margin-bottom: 20px; width: calc(100% - 34px); box-sizing: border-box;
+        }
+        #userName:focus { outline: none; border-color: #e91e63; box-shadow: 0 0 8px rgba(233, 30, 99, 0.3); }
+        #page1 button {
+            background-color: #e91e63; color: white; border: none; padding: 12px 25px;
+            font-size: 1.1em; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease;
+        }
+        #page1 button:hover { background-color: #c2185b; }
+
+        /* Page 2 Styles */
+        #page2 {
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rose-border-container {
+            padding: 15px 10px; border: 3px solid #ff80ab; border-radius: 20px;
+            background-color: #fff5f8; display: inline-block; text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            margin-bottom: 15px; /* Space for credit line */
+        }
+
+        .rose-row-top, .rose-row-bottom {
+            font-size: 1.4em; color: #e91e63; letter-spacing: 1px;
+            overflow-wrap: break-word; word-break: break-all;
+        }
+        .rose-row-top { margin-bottom: 8px; }
+        .rose-row-bottom { margin-top: 8px; }
+        
+        .rose-middle-content { display: flex; align-items: center; justify-content: center; }
+        .rose-col-left, .rose-col-right {
+            font-size: 1.4em; color: #e91e63; line-height: 1.3;
+            padding: 0 8px; display: flex; flex-direction: column;
+        }
+
+        .message-box {
+            background-color: white; border: 2px dashed #ff69b4; border-radius: 12px;
+            padding: 20px 25px; margin: 3px; box-shadow: 0 0 8px rgba(0,0,0,0.05);
+            min-width: 180px; 
+        }
+
+        #greetingMessage {
+            font-size: 1.8em; color: #c2185b; margin-bottom: 15px;
+            font-weight: bold; line-height: 1.6;
+        }
+        .pink-emoji { color: #e91e63; font-size: 1em; }
+        .big-rose { font-size: 3.5em; color: #e53935; display: block; margin-top: 10px; }
+
+        .credit-line {
+            font-size: 0.85em; color: #777; margin-top: 0; text-align: center; line-height: 1.4;
+            margin-bottom: 15px; /* Space for share buttons */
+        }
+        .credit-line a { color: #d81b60; text-decoration: none; }
+        .credit-line a:hover { text-decoration: underline; }
+
+        /* Share Buttons Styles */
+        .share-buttons {
+            margin-bottom: 20px; /* Space before ad */
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Space between buttons */
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+        }
+        .share-buttons a {
+            background-color: #ff69b4; /* HotPink */
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+            display: inline-flex; /* For aligning icon and text if used */
+            align-items: center;
+        }
+        .share-buttons a:hover {
+            background-color: #e91e63; /* Darker pink */
+        }
+        .share-buttons .icon-social { /* If using emoji icons */
+            margin-right: 5px;
+            font-size: 1.2em;
+        }
+
+
+        /* Ad Container Styles */
+        .ad-container {
+            margin-top: 0; /* Adjusted as share buttons provide margin */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            box-sizing: border-box;
+        }
+        #ad-container-page1 { min-height: 50px; }
+        #ad-container-page2 { min-height: 60px; }
+
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page">
+        <h2>नमस्ते!</h2>
+        <p>किसी खास ने आपके लिए कुछ भेजा है...</p>
+        <input type="text" id="userName" placeholder="आपका प्यारा नाम यहाँ लिखें">
+        <button onclick="showPage2()">देखें!</button>
+
+        <div class="ad-container" id="ad-container-page1">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'b2fcc94f9564f5d857441f767b53736b',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/b2fcc94f9564f5d857441f767b53736b/invoke.js"></script>
+        </div>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="rose-border-container">
+            <!-- Added firecracker emojis -->
+            <div class="rose-row-top">🎇🌹✨🌹🎆🌹✨🌹🎇</div>
+            <div class="rose-middle-content">
+                <div class="rose-col-left">
+                    <span>🌹</span><span>🎆</span><span>🌹</span><span>✨</span>
+                </div>
+                <div class="message-box">
+                    <p id="greetingMessage"></p>
+                    <span class="big-rose">🌹</span>
+                </div>
+                <div class="rose-col-right">
+                    <span>✨</span><span>🌹</span><span>🎆</span><span>🌹</span>
+                </div>
+            </div>
+            <div class="rose-row-bottom">🎇🌹✨🌹🎆🌹✨🌹🎇</div>
+        </div>
+        <p class="credit-line">
+            Aapke Dost Hari Dwara ❤️<br>
+            WhatsApp: <a href="https://wa.me/919728754595" target="_blank">9728754595</a>
+        </p>
+
+        <!-- Share Buttons -->
+        <div class="share-buttons">
+            <a id="whatsapp-share" href="#" target="_blank">
+                <span class="icon-social">📱</span> WhatsApp
+            </a>
+            <a id="facebook-share" href="#" target="_blank">
+                <span class="icon-social">👍</span> Facebook
+            </a>
+            <a id="instagram-info" href="#">
+                <span class="icon-social">📸</span> Instagram
+            </a>
+        </div>
+
+        <div class="ad-container" id="ad-container-page2">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'f64dcb71a41940808efecd1eafbe935f',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/f64dcb71a41940808efecd1eafbe935f/invoke.js"></script>
+        </div>
+    </div>
+
+    <script>
+        let currentUserName = "प्यारे दोस्त"; // To store the name for sharing
+
+        function showPage2() {
+            const nameInput = document.getElementById('userName');
+            let name = nameInput.value.trim();
+
+            if (name === "") {
+                name = "प्यारे दोस्त"; // Default name
+            }
+            currentUserName = name; // Update global name for sharing
+
+            const greetingMessage = document.getElementById('greetingMessage');
+            greetingMessage.innerHTML = `राम राम, ${name} जी! <span class="pink-emoji">🙏</span><br>आपका दिन शुभ हो एवं मंगलमय हो!`;
+
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'flex';
+
+            // Setup Share Links
+            setupShareLinks();
+        }
+
+        function setupShareLinks() {
+            const pageUrl = window.location.href;
+            // Using currentUserName

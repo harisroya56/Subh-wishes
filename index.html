@@ -236,4 +236,91 @@
 
         function setupShareLinks() {
             const pageUrl = window.location.href;
-            // Using currentUserName
+            // Using currentUserName which is set in showPage2
+            const shareMessageIntro = `💖 देखो ${currentUserName} के लिए क्या ख़ास संदेश आया है! आप भी देखें 👉`;
+            
+            const encodedShareMessageForWhatsApp = encodeURIComponent(shareMessageIntro + " " + pageUrl);
+            const encodedUrlForFacebook = encodeURIComponent(pageUrl);
+
+            const whatsappBtn = document.getElementById('whatsapp-share');
+            if (whatsappBtn) {
+                whatsappBtn.href = `whatsapp://send?text=${encodedShareMessageForWhatsApp}`;
+            }
+
+            const facebookBtn = document.getElementById('facebook-share');
+            if (facebookBtn) {
+                facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrlForFacebook}`;
+            }
+
+            const instagramBtn = document.getElementById('instagram-info');
+            if (instagramBtn) {
+                instagramBtn.onclick = function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+                    alert(
+                        'Instagram पर शेयर करने के लिए, आप इस पेज का लिंक:\n\n' +
+                        pageUrl +
+                        '\n\nअपनी स्टोरी या पोस्ट में पेस्ट कर सकते हैं। आप पेज का स्क्रीनशॉट लेकर भी शेयर कर सकते हैं!'
+                    );
+                };
+            }
+        }
+    </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let currentUserName = "प्यारे दोस्त";
+
+    function showPage2() {
+      const nameInput = document.getElementById('userName');
+      let name = nameInput.value.trim();
+
+      if (name === "") {
+        name = "प्यारे दोस्त";
+      }
+      currentUserName = name;
+
+      const greetingMessage = document.getElementById('greetingMessage');
+      greetingMessage.innerHTML = `राम राम, ${name} जी! <span class="pink-emoji">🙏</span><br>आपका दिन शुभ हो एवं मंगलमय हो!`;
+
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'flex';
+
+      setupShareLinks();
+    }
+
+    function setupShareLinks() {
+      const pageUrl = window.location.href;
+      const shareMessageIntro = `💖 देखो ${currentUserName} के लिए क्या ख़ास संदेश आया है! आप भी देखें 👉`;
+
+      const encodedShareMessageForWhatsApp = encodeURIComponent(shareMessageIntro + " " + pageUrl);
+      const encodedUrlForFacebook = encodeURIComponent(pageUrl);
+
+      const whatsappBtn = document.getElementById('whatsapp-share');
+      if (whatsappBtn) {
+        whatsappBtn.href = `whatsapp://send?text=${encodedShareMessageForWhatsApp}`;
+      }
+
+      const facebookBtn = document.getElementById('facebook-share');
+      if (facebookBtn) {
+        facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrlForFacebook}`;
+      }
+
+      const instagramBtn = document.getElementById('instagram-info');
+      if (instagramBtn) {
+        instagramBtn.onclick = function(event) {
+          event.preventDefault();
+          alert(
+            'Instagram पर शेयर करने के लिए, आप इस पेज का लिंक:\n\n' +
+            pageUrl +
+            '\n\nअपनी स्टोरी या पोस्ट में पेस्ट कर सकते हैं। आप पेज का स्क्रीनशॉट लेकर भी शेयर कर सकते हैं!'
+          );
+        };
+      }
+    }
+
+    // Yeh line function ko global banata hai
+    window.showPage2 = showPage2;
+  });
+</script>
+
+</body>
+</html>
